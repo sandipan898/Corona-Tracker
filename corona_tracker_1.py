@@ -56,32 +56,38 @@ def get_chart(country):
         info = eval(f.read())
         f.close()
 
-    if country == '':
-        return
+    print("Reading done")
 
-    df = DataFrame(info[country])
-    df.to_csv('corona_timeseries.csv')
+    try:
+        if country == '':
+            return
 
-    plt.rcParams.update({'font.size': 8})    
-    figure = Figure(figsize=(5,5), dpi=90)
+        df = DataFrame(info[country])
+        df.to_csv('corona_timeseries.csv')
+        #print(df)
+        plt.rcParams.update({'font.size': 8})    
+        figure = Figure(figsize=(5,5), dpi=90)
+        subplot = figure.add_subplot(111)
+        # print("ploting subplot")
 
-    subplot = figure.add_subplot(111)
+        subplot.plot(df['date'], df['confirmed'], label='confirmed', color='blue')
+        subplot.plot(df['date'], df['deaths'], label='deaths', color='red')
+        subplot.plot(df['date'], df['recovered'], label='recovered', color='green')
+        subplot.legend(loc='upper left')
 
-    subplot.plot(df['date'], df['confirmed'], label='confirmed', color='blue')
-    subplot.plot(df['date'], df['deaths'], label='deaths', color='red')
-    subplot.plot(df['date'], df['recovered'], label='recovered', color='green')
-    subplot.legend(loc='upper left')
+        start, end = subplot.get_xlim()
+        subplot.xaxis.set_ticks(np.arange(start, end, 5))
 
-    start, end = subplot.get_xlim()
-    subplot.xaxis.set_ticks(np.arange(start, end, 5))
+        for tick in subplot.get_xticklabels():
+            tick.set_rotation(60)
 
-    for tick in subplot.get_xticklabels():
-        tick.set_rotation(60)
+        canvas = FigureCanvasTkAgg(figure, master=frame_stat)
 
-    canvas = FigureCanvasTkAgg(figure, master=frame_stat)
-
-    canvas.get_tk_widget().grid(row=4, column=0, columnspan=3, sticky="wen", padx=20, pady=5)
-    plt.show()
+        canvas.get_tk_widget().grid(row=4, column=0, columnspan=3, sticky="wen", padx=20, pady=5)
+        #print("before plot")
+        plt.show()
+    except Exception as KeyError:
+        messagebox.showerror("Name Error", "Enter the correct country name")
 
 
 def scrape_data():
