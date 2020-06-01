@@ -19,7 +19,7 @@
  * run *pip install -r requirements.txt*
  * Choose your webdriver as your browser preference in this case *chromedriver*
  * change the *chromedriver path* to where your chromedriver is located.
- * Run the python file corona_tracker_1.py.
+ * Run the python file *corona_tracker_1.py*.
  * This *programn GUI is compatible on linux*. You can run on windows also but have to fix some UI bugs.
  
 ### Programe Interface:
