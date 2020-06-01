@@ -15,3 +15,11 @@
  8. textwrap
  9. selenium
 
+### To use this program:
+ * run *pip install -r requirements.txt*
+ * Choose your webdriver as your browser preference in this case *chromedriver*
+ * change the *chromedriver path* to where your chromedriver is located
+ * This *programn GUI is compatible on linux*. You can run on windows also but have to fix some UI bugs.
+ 
+### Programe Interface:
+![Interface Image](corona_tracker.png)
