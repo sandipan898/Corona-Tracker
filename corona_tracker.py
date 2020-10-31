@@ -48,13 +48,17 @@ def save_data(content, extension):
 def get_chart(country):
     """To plot the growth graph based on the country"""
 
-    #info = get_data("https://pomber.github.io/covid19/timeseries.json")
-    #save_data(info, "txt")
-    #save_data(info, "csv")
+    """To get current data"""
+    info = get_data("https://pomber.github.io/covid19/timeseries.json")
+    save_data(info, "txt")
+    save_data(info, "csv")
 
-    with open("corona_timeseries.txt", "r") as f:
-        info = eval(f.read())
-        f.close()
+    # Uncomment the below three lines of code if API endpoint is not working, or 
+    # you are working offline, or you don't want to fetch new information 
+    # for any reason 
+    # with open("corona_timeseries.txt", "r") as f:
+    #     info = eval(f.read())
+    #     f.close()
 
     print("Reading done")
 
@@ -76,7 +80,7 @@ def get_chart(country):
         subplot.legend(loc='upper left')
 
         start, end = subplot.get_xlim()
-        subplot.xaxis.set_ticks(np.arange(start, end, 5))
+        subplot.xaxis.set_ticks(np.arange(start, end, 15))
 
         for tick in subplot.get_xticklabels():
             tick.set_rotation(60)
